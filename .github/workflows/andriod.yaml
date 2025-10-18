@@ -2,19 +2,37 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        path: OrlaJournal  # force correct casing
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Make gradlew executable
+      working-directory: ./OrlaJournal
+      run: chmod +x ./gradlew
+
+    - name: Debug workspace
+      working-directory: ./OrlaJournal
+      run: |
+        pwd
+        ls -la
+        cat settings.gradle || echo "No settings.gradle found"
+
+    - name: Build Debug APK
+      working-directory: ./OrlaJournal
+      run: ./gradlew assembleDebug
