@@ -3,29 +3,24 @@ package com.orla.journal
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.orla.journal.ui.theme.OrlaJournalTheme
+import com.orla.journal.ui.screens.JournalScreen
+import com.orla.journal.scroll.ScrollManager
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val scrollManager = ScrollManager(applicationContext)
         setContent {
-            OrlaJournalTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text("🌌 Orla Journal: Compose Prototype", style = MaterialTheme.typography.headlineMedium)
-                        Spacer(Modifier.height(32.dp))
-                        Text("Hello, sovereign memory!")
-                    }
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    JournalScreen(scrollManager = scrollManager)
                 }
             }
         }
