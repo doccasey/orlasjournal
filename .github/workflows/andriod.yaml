@@ -22,14 +22,11 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
+    - name: Build with Gradle (with output)
+      run: ./gradlew assembleDebug --stacktrace --info
 
-    - name: Find all APK files
-      run: find . -name "*.apk" -type f | head -10
+    - name: Check build directory structure
+      run: find . -name "build" -type d | head -10
 
-    - name: Upload any found APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: built-apk
-        path: "**/*.apk"
+    - name: List project root
+      run: ls -la
