@@ -25,6 +25,10 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug
 
+    # DIAGNOSTIC STEP: List the APK directory
+    - name: List APK Files
+      run: find app/build/outputs -name "*.apk" -exec echo "Found: {}" \;
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
