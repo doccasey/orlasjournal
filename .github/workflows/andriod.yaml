@@ -15,7 +15,7 @@ jobs:
     
     - name: Download known-good Gradle wrapper
       run: |
-        wget -O gradle-wrapper.jar https://repo.maven.apache.org/maven2/gradle/wrapper/gradle-wrapper/3.1/gradle-wrapper-3.1.jar
+        wget -O gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
         mkdir -p gradle/wrapper
         mv gradle-wrapper.jar gradle/wrapper/
 
